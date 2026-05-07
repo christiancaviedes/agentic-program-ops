@@ -17,6 +17,13 @@ This project is designed around a simple belief: teams lose time when critical p
 - Highlights delivery risks, blockers, and coordination gaps
 - Demonstrates how AI can support TPM and product operations without replacing human judgment
 
+## Example artifacts
+
+- [`examples/sample-prd-input.md`](examples/sample-prd-input.md)
+- [`examples/sample-prd-output.md`](examples/sample-prd-output.md)
+- [`examples/sample-exec-summary.md`](examples/sample-exec-summary.md)
+- [`architecture/system-overview.md`](architecture/system-overview.md)
+
 ## Core workflows
 
 ### 1. PRD Synthesizer
