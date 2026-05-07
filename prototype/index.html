@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Program Ops</title>
+  <style>
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:#0d1117;color:#f0f6fc}
+    .wrap{max-width:1200px;margin:0 auto;padding:40px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:start}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:44px;margin:0 0 12px}.muted{color:#8b949e;line-height:1.6}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#1f6feb22;border:1px solid #1f6feb55;color:#cfe5ff;margin:6px 8px 0 0;font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px}
+    .workflow{padding:18px;border-radius:16px;background:#0d1117;border:1px solid #30363d}
+    .flow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}.node{padding:12px 16px;border-radius:14px;background:#0d1117;border:1px solid #30363d}.arrow{color:#8b949e}
+    .summary{background:linear-gradient(180deg,#1f6feb,#1158c7);border:none}
+    .summary h3,.summary p{margin:0 0 10px}
+    pre{white-space:pre-wrap;background:#0d1117;padding:14px;border-radius:14px;border:1px solid #30363d;color:#c9d1d9}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="card">
+        <div class="pill">AI Program Ops</div><div class="pill">TPM / Product Systems</div><div class="pill">Prototype UI</div>
+        <h1>Agentic Program Ops</h1>
+        <p class="muted">A lightweight prototype interface for turning fragmented planning inputs into PRDs, roadmap views, dependency awareness, executive summaries, and delivery-risk signals.</p>
+        <div class="grid">
+          <div class="workflow"><strong>PRD Synthesizer</strong><p class="muted">Convert rough planning notes into structured PRD drafts.</p></div>
+          <div class="workflow"><strong>Roadmap Generator</strong><p class="muted">Propose sequencing based on goals, constraints, and dependencies.</p></div>
+          <div class="workflow"><strong>Dependency Mapper</strong><p class="muted">Surface cross-team relationships before they become blockers.</p></div>
+          <div class="workflow"><strong>Risk Review</strong><p class="muted">Highlight ambiguity, sequencing issues, and delivery risks.</p></div>
+        </div>
+      </div>
+      <div class="card summary">
+        <h3>Executive Summary</h3>
+        <p>Roadmap planning is on track. Two dependency risks need sequencing decisions. PRD synthesis reduced manual coordination and improved planning clarity.</p>
+        <pre>Inputs → Workflow Agents → Structured Outputs → Human Review</pre>
+      </div>
+    </div>
+    <div class="card" style="margin-top:28px;">
+      <strong>Workflow View</strong>
+      <div class="flow">
+        <div class="node">Planning Inputs</div><div class="arrow">→</div>
+        <div class="node">Agent Layer</div><div class="arrow">→</div>
+        <div class="node">PRD / Roadmap / Dependencies</div><div class="arrow">→</div>
+        <div class="node">Leadership Summary</div><div class="arrow">→</div>
+        <div class="node">Human Review</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

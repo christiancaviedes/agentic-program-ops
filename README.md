@@ -78,3 +78,7 @@ assets/         # screenshots and diagrams
 ## Status
 
 Prototype / portfolio project
+
+## Prototype UI
+
+A lightweight visual prototype lives at [`prototype/index.html`](prototype/index.html). Open it locally in a browser to explore the concept UI.
