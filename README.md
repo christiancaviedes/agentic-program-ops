@@ -17,6 +17,10 @@ This project is designed around a simple belief: teams lose time when critical p
 - Highlights delivery risks, blockers, and coordination gaps
 - Demonstrates how AI can support TPM and product operations without replacing human judgment
 
+## Visual overview
+
+![Agentic Program Ops Diagram](assets/diagrams/agentic-program-ops.svg)
+
 ## Example artifacts
 
 - [`examples/sample-prd-input.md`](examples/sample-prd-input.md)

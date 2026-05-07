@@ -1,0 +1,17 @@
+flowchart TD
+    A[Planning Inputs\nDocs / Tickets / Notes] --> B[Workflow Agent Layer]
+    B --> C[PRD Synthesizer]
+    B --> D[Roadmap Generator]
+    B --> E[Dependency Mapper]
+    B --> F[Executive Summary Generator]
+    B --> G[Risk Review Agent]
+    C --> H[Structured PRD Output]
+    D --> I[Roadmap Proposal]
+    E --> J[Dependency View]
+    F --> K[Leadership Summary]
+    G --> L[Risk / Action Signals]
+    H --> M[Human Review]
+    I --> M
+    J --> M
+    K --> M
+    L --> M
