@@ -1,0 +1,68 @@
+{
+  "program": "Enterprise AI Support Copilot",
+  "objective": "Launch a governed support copilot that reduces resolution time while preserving human accountability.",
+  "executive_owner": "VP, Customer Experience",
+  "target_date": "2026-11-20",
+  "assumptions": [
+    "Security review capacity is available in September.",
+    "The support knowledge base has a named content owner."
+  ],
+  "decisions": [
+    {
+      "decision": "Approve the first-market scope and launch quality gate",
+      "owner": "Executive steering group",
+      "due": "2026-09-12"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Evaluation coverage may not represent high-severity support cases",
+      "severity": "high",
+      "owner": "AI Quality Lead",
+      "mitigation": "Add a stratified red-team set and require zero critical-policy regressions."
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "WS1",
+      "title": "Requirements and policy contract",
+      "owner": "Product Lead",
+      "team": "Product",
+      "window": "Sep 1–12",
+      "status": "in progress",
+      "depends_on": [],
+      "deliverables": ["Approved PRD", "Policy boundaries"]
+    },
+    {
+      "id": "WS2",
+      "title": "Retrieval and orchestration platform",
+      "owner": "Platform EM",
+      "team": "AI Platform",
+      "window": "Sep 15–Oct 17",
+      "status": "planned",
+      "depends_on": ["WS1"],
+      "deliverables": ["Staging service", "Tracing dashboard"],
+      "risks": ["Source freshness has no enforceable SLA"]
+    },
+    {
+      "id": "WS3",
+      "title": "Quality evaluation and launch gates",
+      "owner": "AI Quality Lead",
+      "team": "Product Quality",
+      "window": "Sep 22–Oct 31",
+      "status": "planned",
+      "depends_on": ["WS1", "WS2"],
+      "deliverables": ["Regression suite", "Go/no-go scorecard"]
+    },
+    {
+      "id": "WS4",
+      "title": "Pilot and operational readiness",
+      "owner": "TPM",
+      "team": "Customer Operations",
+      "window": "Nov 3–20",
+      "status": "planned",
+      "depends_on": ["WS2", "WS3"],
+      "deliverables": ["Pilot report", "Runbook", "Rollback rehearsal"]
+    }
+  ]
+}

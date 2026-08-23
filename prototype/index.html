@@ -2,53 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agentic Program Ops</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive demo of Agentic Program Ops." />
+  <title>Agentic Program Ops — Execution, compiled</title>
   <style>
-    body{margin:0;font-family:Inter,Arial,sans-serif;background:#0d1117;color:#f0f6fc}
-    .wrap{max-width:1200px;margin:0 auto;padding:40px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:start}
-    .card{background:#161b22;border:1px solid #30363d;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    h1{font-size:44px;margin:0 0 12px}.muted{color:#8b949e;line-height:1.6}
-    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#1f6feb22;border:1px solid #1f6feb55;color:#cfe5ff;margin:6px 8px 0 0;font-size:13px}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px}
-    .workflow{padding:18px;border-radius:16px;background:#0d1117;border:1px solid #30363d}
-    .flow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}.node{padding:12px 16px;border-radius:14px;background:#0d1117;border:1px solid #30363d}.arrow{color:#8b949e}
-    .summary{background:linear-gradient(180deg,#1f6feb,#1158c7);border:none}
-    .summary h3,.summary p{margin:0 0 10px}
-    pre{white-space:pre-wrap;background:#0d1117;padding:14px;border-radius:14px;border:1px solid #30363d;color:#c9d1d9}
+    :root{--ink:#10131a;--paper:#f4f0e7;--acid:#c7ff48;--blue:#3157ff;--line:#cbc5b9;--muted:#625f59}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+    .shell{max-width:1240px;margin:auto;padding:28px}.nav{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:10px 0 22px}.mark{font-weight:900;letter-spacing:-.04em}.tag{font:600 12px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.12em}
+    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;padding:76px 0 54px;align-items:end}h1{font-size:clamp(54px,8vw,110px);line-height:.84;letter-spacing:-.075em;margin:0;max-width:900px}.hero p{font-size:19px;line-height:1.55;margin:0 0 6px;color:var(--muted)}
+    .stripe{background:var(--ink);color:white;padding:16px 0;overflow:hidden;white-space:nowrap}.stripe span{font:700 13px ui-monospace,monospace;letter-spacing:.1em;margin-right:48px}.stripe b{color:var(--acid)}
+    .workbench{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--ink);margin:62px 0;background:#fff}.rail{padding:28px;border-right:1px solid var(--ink)}.rail h2{font-size:28px;letter-spacing:-.04em;margin:0 0 24px}.step{border-top:1px solid var(--line);padding:16px 0;cursor:pointer;display:flex;gap:14px;align-items:flex-start}.step strong{font:700 12px ui-monospace,monospace;background:var(--paper);padding:4px 7px}.step.active strong{background:var(--acid)}.step span{font-weight:700}.step small{display:block;color:var(--muted);margin-top:4px;line-height:1.4}
+    .screen{background:#11141b;color:#e9e8e4;padding:30px;min-height:500px}.screen-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333946;padding-bottom:18px}.status{color:var(--acid);font:700 12px ui-monospace,monospace}.panel{display:none}.panel.active{display:block}.kicker{font:700 11px ui-monospace,monospace;letter-spacing:.14em;color:#9da7bd;margin-top:32px}.panel h3{font-size:35px;letter-spacing:-.04em;margin:8px 0 18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric{border:1px solid #333946;padding:18px}.metric b{display:block;font-size:27px;color:var(--acid)}.metric span{font-size:12px;color:#a8afbd}.bar{margin:12px 0;padding:14px;border-left:3px solid var(--blue);background:#181d28}.bar.warn{border-color:#ffb84d}.code{font:13px/1.65 ui-monospace,monospace;color:#b9c3d8;white-space:pre-wrap}.gate{margin-top:24px;border:1px solid var(--acid);padding:14px;color:var(--acid);font:700 12px ui-monospace,monospace}
+    .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:64px}.proof div{background:var(--paper);padding:25px}.proof b{font-size:34px;display:block;letter-spacing:-.05em}.proof span{color:var(--muted);font-size:13px}.footer{display:flex;justify-content:space-between;padding:24px 0;border-top:1px solid var(--line);font-size:13px}.footer a{color:var(--ink);font-weight:800}
+    @media(max-width:800px){.hero,.workbench{grid-template-columns:1fr}.hero{padding:50px 0 36px}.rail{border-right:0;border-bottom:1px solid var(--ink)}.grid,.proof{grid-template-columns:repeat(2,1fr)}.shell{padding:20px}.screen{min-height:550px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="card">
-        <div class="pill">AI Program Ops</div><div class="pill">TPM / Product Systems</div><div class="pill">Prototype UI</div>
-        <h1>Agentic Program Ops</h1>
-        <p class="muted">A lightweight prototype interface for turning fragmented planning inputs into PRDs, roadmap views, dependency awareness, executive summaries, and delivery-risk signals.</p>
-        <div class="grid">
-          <div class="workflow"><strong>PRD Synthesizer</strong><p class="muted">Convert rough planning notes into structured PRD drafts.</p></div>
-          <div class="workflow"><strong>Roadmap Generator</strong><p class="muted">Propose sequencing based on goals, constraints, and dependencies.</p></div>
-          <div class="workflow"><strong>Dependency Mapper</strong><p class="muted">Surface cross-team relationships before they become blockers.</p></div>
-          <div class="workflow"><strong>Risk Review</strong><p class="muted">Highlight ambiguity, sequencing issues, and delivery risks.</p></div>
-        </div>
+  <main class="shell">
+    <nav class="nav"><div class="mark">APO / 0.1</div><div class="tag">Program intelligence, with accountability</div></nav>
+    <section class="hero"><h1>Execution,<br>compiled.</h1><p>Turn one structured PRD into a roadmap, dependency graph, RAID log, executive brief, and trace evidence. Fast enough for iteration. Strict enough for real decisions.</p></section>
+  </main>
+  <div class="stripe"><span><b>●</b> CONTRACT VALIDATED</span><span><b>●</b> DEPENDENCIES CHECKED</span><span><b>●</b> HUMAN GATE ACTIVE</span><span><b>●</b> MODEL COST $0</span></div>
+  <main class="shell">
+    <section class="workbench">
+      <aside class="rail"><h2>Run anatomy</h2>
+        <div class="step active" data-panel="input"><strong>01</strong><div><span>Validated input</span><small>PRD intent plus Jira-style workstreams</small></div></div>
+        <div class="step" data-panel="graph"><strong>02</strong><div><span>Dependency graph</span><small>Reject unknown references and cycles</small></div></div>
+        <div class="step" data-panel="artifacts"><strong>03</strong><div><span>Operating artifacts</span><small>Roadmap, RAID, brief, evidence</small></div></div>
+        <div class="step" data-panel="gate"><strong>04</strong><div><span>Human decision gate</span><small>Draft is never confused with approval</small></div></div>
+      </aside>
+      <div class="screen"><div class="screen-head"><b>Enterprise AI Support Copilot</b><span class="status">RUN COMPLETE · 7.4 MS</span></div>
+        <section class="panel active" id="input"><div class="kicker">INPUT CONTRACT</div><h3>Ambiguity becomes structure.</h3><div class="grid"><div class="metric"><b>4</b><span>named workstreams</span></div><div class="metric"><b>5</b><span>dependencies</span></div><div class="metric"><b>2</b><span>open risks</span></div></div><div class="code">objective: Governed support copilot launch<br>target: 2026-11-20<br>owner: VP, Customer Experience<br>quality_gate: zero critical policy regressions</div></section>
+        <section class="panel" id="graph"><div class="kicker">SEQUENCING</div><h3>Impossible plans fail early.</h3><div class="bar">WS1 · Requirements and policy contract</div><div class="bar">WS1 → WS2 · Retrieval and orchestration platform</div><div class="bar">WS1 + WS2 → WS3 · Quality evaluation</div><div class="bar">WS2 + WS3 → WS4 · Pilot readiness</div></section>
+        <section class="panel" id="artifacts"><div class="kicker">OUTPUT BUNDLE</div><h3>One source. Six artifacts.</h3><div class="grid"><div class="metric"><b>01</b><span>roadmap.md</span></div><div class="metric"><b>02</b><span>dependencies.mmd</span></div><div class="metric"><b>03</b><span>raid-log.md</span></div><div class="metric"><b>04</b><span>executive-brief.md</span></div><div class="metric"><b>05</b><span>run-metrics.json</span></div><div class="metric"><b>06</b><span>trace.jsonl</span></div></div></section>
+        <section class="panel" id="gate"><div class="kicker">CONTROL POINT</div><h3>Automation advises. Owners decide.</h3><div class="bar warn">Decision needed: approve first-market scope and launch quality gate.</div><div class="gate">DRAFT — HUMAN REVIEW REQUIRED</div></section>
       </div>
-      <div class="card summary">
-        <h3>Executive Summary</h3>
-        <p>Roadmap planning is on track. Two dependency risks need sequencing decisions. PRD synthesis reduced manual coordination and improved planning clarity.</p>
-        <pre>Inputs → Workflow Agents → Structured Outputs → Human Review</pre>
-      </div>
-    </div>
-    <div class="card" style="margin-top:28px;">
-      <strong>Workflow View</strong>
-      <div class="flow">
-        <div class="node">Planning Inputs</div><div class="arrow">→</div>
-        <div class="node">Agent Layer</div><div class="arrow">→</div>
-        <div class="node">PRD / Roadmap / Dependencies</div><div class="arrow">→</div>
-        <div class="node">Leadership Summary</div><div class="arrow">→</div>
-        <div class="node">Human Review</div>
-      </div>
-    </div>
-  </div>
+    </section>
+    <section class="proof"><div><b>0</b><span>runtime dependencies</span></div><div><b>$0</b><span>model cost per run</span></div><div><b>3×</b><span>Python versions in CI</span></div><div><b>5/5</b><span>evaluation gates</span></div></section>
+    <footer class="footer"><span>Built by Christian Caviedes</span><a href="https://github.com/christiancaviedes/agentic-program-ops">View source →</a></footer>
+  </main>
+  <script>document.querySelectorAll('.step').forEach(step=>step.addEventListener('click',()=>{document.querySelectorAll('.step,.panel').forEach(x=>x.classList.remove('active'));step.classList.add('active');document.getElementById(step.dataset.panel).classList.add('active')}));</script>
 </body>
 </html>

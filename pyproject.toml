@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-program-ops"
+version = "0.1.0"
+description = "Turn PRD and Jira-style program inputs into execution-ready operating artifacts."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Christian Caviedes"}]
+keywords = ["tpm", "program-management", "agentic-workflows", "ai-platform"]
+
+[project.scripts]
+program-ops = "program_ops.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["program_ops*"]
+
