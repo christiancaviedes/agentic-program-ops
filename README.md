@@ -9,7 +9,7 @@
 
 ## The result
 
-One realistic input produces six reviewable artifacts in milliseconds, offline, with no API key and no model cost:
+One realistic input produces six reviewable artifacts in milliseconds, offline, with no API key and no model cost. The browser demo now runs the same contract checks client-side and downloads the full artifact bundle as a ZIP:
 
 ```text
 PRD / Jira input
@@ -48,7 +48,7 @@ After an accountable human reviews the plan, regenerate it with an approval mark
 program-ops examples/launch-input.json --output build/approved-plan --approve
 ```
 
-Try the [live workflow demo](https://christiancaviedes.github.io/agentic-program-ops/) for a visual walkthrough.
+Try the [live interactive compiler](https://christiancaviedes.github.io/agentic-program-ops/): paste or upload a PRD/Jira-style JSON input, compile the plan, inspect every artifact, record the human approval state, and download the bundle. Input never leaves the browser.
 
 ## Input contract
 
@@ -112,8 +112,8 @@ Read the [architecture](architecture/system-overview.md), [ADR](docs/adr/0001-de
 ## Roadmap
 
 - `v0.1`: deterministic CLI, CI, evals, trace/metrics, Pages demo, governance docs
-- `v0.2`: optional provider-neutral LLM enrichment behind the validated contract
-- `v0.3`: Jira/Linear adapters, diff-aware plan updates, OpenTelemetry spans
+- `v0.2`: interactive browser compiler, JSON upload, artifact preview, approval gate, ZIP export
+- `v0.3`: optional provider-neutral LLM enrichment, Jira/Linear adapters, OpenTelemetry spans
 - `v1.0`: policy-controlled multi-program workspace with approval audit trail
 
 ## Why I built it

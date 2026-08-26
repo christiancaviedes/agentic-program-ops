@@ -3,44 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Interactive demo of Agentic Program Ops." />
+  <meta name="description" content="Compile PRD and Jira-style inputs into an execution-ready program plan in your browser." />
   <title>Agentic Program Ops — Execution, compiled</title>
-  <style>
-    :root{--ink:#10131a;--paper:#f4f0e7;--acid:#c7ff48;--blue:#3157ff;--line:#cbc5b9;--muted:#625f59}
-    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif}
-    .shell{max-width:1240px;margin:auto;padding:28px}.nav{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:10px 0 22px}.mark{font-weight:900;letter-spacing:-.04em}.tag{font:600 12px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.12em}
-    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;padding:76px 0 54px;align-items:end}h1{font-size:clamp(54px,8vw,110px);line-height:.84;letter-spacing:-.075em;margin:0;max-width:900px}.hero p{font-size:19px;line-height:1.55;margin:0 0 6px;color:var(--muted)}
-    .stripe{background:var(--ink);color:white;padding:16px 0;overflow:hidden;white-space:nowrap}.stripe span{font:700 13px ui-monospace,monospace;letter-spacing:.1em;margin-right:48px}.stripe b{color:var(--acid)}
-    .workbench{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--ink);margin:62px 0;background:#fff}.rail{padding:28px;border-right:1px solid var(--ink)}.rail h2{font-size:28px;letter-spacing:-.04em;margin:0 0 24px}.step{border-top:1px solid var(--line);padding:16px 0;cursor:pointer;display:flex;gap:14px;align-items:flex-start}.step strong{font:700 12px ui-monospace,monospace;background:var(--paper);padding:4px 7px}.step.active strong{background:var(--acid)}.step span{font-weight:700}.step small{display:block;color:var(--muted);margin-top:4px;line-height:1.4}
-    .screen{background:#11141b;color:#e9e8e4;padding:30px;min-height:500px}.screen-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333946;padding-bottom:18px}.status{color:var(--acid);font:700 12px ui-monospace,monospace}.panel{display:none}.panel.active{display:block}.kicker{font:700 11px ui-monospace,monospace;letter-spacing:.14em;color:#9da7bd;margin-top:32px}.panel h3{font-size:35px;letter-spacing:-.04em;margin:8px 0 18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric{border:1px solid #333946;padding:18px}.metric b{display:block;font-size:27px;color:var(--acid)}.metric span{font-size:12px;color:#a8afbd}.bar{margin:12px 0;padding:14px;border-left:3px solid var(--blue);background:#181d28}.bar.warn{border-color:#ffb84d}.code{font:13px/1.65 ui-monospace,monospace;color:#b9c3d8;white-space:pre-wrap}.gate{margin-top:24px;border:1px solid var(--acid);padding:14px;color:var(--acid);font:700 12px ui-monospace,monospace}
-    .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:64px}.proof div{background:var(--paper);padding:25px}.proof b{font-size:34px;display:block;letter-spacing:-.05em}.proof span{color:var(--muted);font-size:13px}.footer{display:flex;justify-content:space-between;padding:24px 0;border-top:1px solid var(--line);font-size:13px}.footer a{color:var(--ink);font-weight:800}
-    @media(max-width:800px){.hero,.workbench{grid-template-columns:1fr}.hero{padding:50px 0 36px}.rail{border-right:0;border-bottom:1px solid var(--ink)}.grid,.proof{grid-template-columns:repeat(2,1fr)}.shell{padding:20px}.screen{min-height:550px}}
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="shell">
-    <nav class="nav"><div class="mark">APO / 0.1</div><div class="tag">Program intelligence, with accountability</div></nav>
-    <section class="hero"><h1>Execution,<br>compiled.</h1><p>Turn one structured PRD into a roadmap, dependency graph, RAID log, executive brief, and trace evidence. Fast enough for iteration. Strict enough for real decisions.</p></section>
-  </main>
-  <div class="stripe"><span><b>●</b> CONTRACT VALIDATED</span><span><b>●</b> DEPENDENCIES CHECKED</span><span><b>●</b> HUMAN GATE ACTIVE</span><span><b>●</b> MODEL COST $0</span></div>
-  <main class="shell">
-    <section class="workbench">
-      <aside class="rail"><h2>Run anatomy</h2>
-        <div class="step active" data-panel="input"><strong>01</strong><div><span>Validated input</span><small>PRD intent plus Jira-style workstreams</small></div></div>
-        <div class="step" data-panel="graph"><strong>02</strong><div><span>Dependency graph</span><small>Reject unknown references and cycles</small></div></div>
-        <div class="step" data-panel="artifacts"><strong>03</strong><div><span>Operating artifacts</span><small>Roadmap, RAID, brief, evidence</small></div></div>
-        <div class="step" data-panel="gate"><strong>04</strong><div><span>Human decision gate</span><small>Draft is never confused with approval</small></div></div>
-      </aside>
-      <div class="screen"><div class="screen-head"><b>Enterprise AI Support Copilot</b><span class="status">RUN COMPLETE · 7.4 MS</span></div>
-        <section class="panel active" id="input"><div class="kicker">INPUT CONTRACT</div><h3>Ambiguity becomes structure.</h3><div class="grid"><div class="metric"><b>4</b><span>named workstreams</span></div><div class="metric"><b>5</b><span>dependencies</span></div><div class="metric"><b>2</b><span>open risks</span></div></div><div class="code">objective: Governed support copilot launch<br>target: 2026-11-20<br>owner: VP, Customer Experience<br>quality_gate: zero critical policy regressions</div></section>
-        <section class="panel" id="graph"><div class="kicker">SEQUENCING</div><h3>Impossible plans fail early.</h3><div class="bar">WS1 · Requirements and policy contract</div><div class="bar">WS1 → WS2 · Retrieval and orchestration platform</div><div class="bar">WS1 + WS2 → WS3 · Quality evaluation</div><div class="bar">WS2 + WS3 → WS4 · Pilot readiness</div></section>
-        <section class="panel" id="artifacts"><div class="kicker">OUTPUT BUNDLE</div><h3>One source. Six artifacts.</h3><div class="grid"><div class="metric"><b>01</b><span>roadmap.md</span></div><div class="metric"><b>02</b><span>dependencies.mmd</span></div><div class="metric"><b>03</b><span>raid-log.md</span></div><div class="metric"><b>04</b><span>executive-brief.md</span></div><div class="metric"><b>05</b><span>run-metrics.json</span></div><div class="metric"><b>06</b><span>trace.jsonl</span></div></div></section>
-        <section class="panel" id="gate"><div class="kicker">CONTROL POINT</div><h3>Automation advises. Owners decide.</h3><div class="bar warn">Decision needed: approve first-market scope and launch quality gate.</div><div class="gate">DRAFT — HUMAN REVIEW REQUIRED</div></section>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="masthead">
+    <a class="brand" href="#top" aria-label="Agentic Program Ops home">
+      <span class="brand-glyph">AP</span><span>Program Ops</span>
+    </a>
+    <div class="mast-meta"><span class="signal"></span>Browser-native · no data leaves this tab</div>
+    <a class="source-link" href="https://github.com/christiancaviedes/agentic-program-ops">Source ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow">Program intelligence / human accountability</div>
+      <h1>Turn ambiguity<br />into an <em>operating system.</em></h1>
+      <p class="hero-copy">Paste a structured PRD with Jira-style workstreams. Get a roadmap, dependency graph, RAID log, executive brief, metrics, and trace—ready for human review.</p>
+      <a class="hero-cta" href="#compiler">Compile a program <span>↓</span></a>
+      <div class="hero-proof" aria-label="Product proof points">
+        <div><strong>6</strong><span>artifacts</span></div>
+        <div><strong>$0</strong><span>model cost</span></div>
+        <div><strong>0</strong><span>uploads</span></div>
+        <div><strong>5/5</strong><span>eval gates</span></div>
       </div>
     </section>
-    <section class="proof"><div><b>0</b><span>runtime dependencies</span></div><div><b>$0</b><span>model cost per run</span></div><div><b>3×</b><span>Python versions in CI</span></div><div><b>5/5</b><span>evaluation gates</span></div></section>
-    <footer class="footer"><span>Built by Christian Caviedes</span><a href="https://github.com/christiancaviedes/agentic-program-ops">View source →</a></footer>
+
+    <section class="compiler" id="compiler">
+      <div class="compiler-head">
+        <div>
+          <span class="section-number">01</span>
+          <h2>Program compiler</h2>
+        </div>
+        <div class="run-state" id="runState" data-state="ready"><span></span>Ready for input</div>
+      </div>
+
+      <div class="workspace">
+        <section class="input-pane" aria-labelledby="inputTitle">
+          <div class="pane-head">
+            <div><span class="pane-label">Input contract</span><h3 id="inputTitle">PRD + Jira JSON</h3></div>
+            <div class="input-actions">
+              <button class="text-button" id="sampleButton" type="button">Load sample</button>
+              <label class="text-button upload-button" for="fileInput">Upload JSON</label>
+              <input id="fileInput" type="file" accept="application/json,.json" />
+            </div>
+          </div>
+          <label class="sr-only" for="programInput">Program input in JSON format</label>
+          <textarea id="programInput" spellcheck="false" aria-describedby="inputHelp"></textarea>
+          <div class="input-foot">
+            <span id="inputHelp">Required: program, objective, target_date, workstreams</span>
+            <span id="charCount">0 chars</span>
+          </div>
+          <div class="approval-row">
+            <label class="switch">
+              <input type="checkbox" id="approvalToggle" />
+              <span class="switch-track"><span></span></span>
+              <span><strong>Human approval recorded</strong><small>Off by default. Approval changes artifact state.</small></span>
+            </label>
+          </div>
+          <button class="compile-button" id="compileButton" type="button"><span>Compile execution plan</span><b>⌘ ↵</b></button>
+          <div class="error-box" id="errorBox" role="alert" aria-live="polite" hidden></div>
+        </section>
+
+        <section class="output-pane" aria-labelledby="outputTitle">
+          <div class="output-empty" id="outputEmpty">
+            <div class="empty-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p>Validated artifacts will appear here.</p>
+            <small>Unknown dependencies, duplicate IDs, and cycles fail before generation.</small>
+          </div>
+
+          <div class="output-ready" id="outputReady" hidden>
+            <div class="pane-head output-heading">
+              <div><span class="pane-label">Output bundle</span><h3 id="outputTitle">Execution package</h3></div>
+              <button class="download-button" id="downloadButton" type="button">Download .zip ↓</button>
+            </div>
+            <div class="metric-strip" id="metricStrip"></div>
+            <nav class="artifact-tabs" id="artifactTabs" aria-label="Generated artifacts"></nav>
+            <div class="artifact-stage">
+              <div class="artifact-meta"><span id="artifactName"></span><button id="copyButton" type="button">Copy</button></div>
+              <pre id="artifactPreview" tabindex="0"></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="method">
+      <div class="method-intro"><span class="section-number">02</span><h2>Strict where<br />it matters.</h2></div>
+      <div class="method-grid">
+        <article><span>01</span><h3>Validate the contract</h3><p>Required fields, unique workstream IDs, known references, and acyclic dependencies.</p></article>
+        <article><span>02</span><h3>Compile the evidence</h3><p>One source becomes six synchronized artifacts, with runtime metrics and trace context.</p></article>
+        <article><span>03</span><h3>Keep judgment human</h3><p>Every output is visibly draft until an accountable owner records approval.</p></article>
+      </div>
+    </section>
   </main>
-  <script>document.querySelectorAll('.step').forEach(step=>step.addEventListener('click',()=>{document.querySelectorAll('.step,.panel').forEach(x=>x.classList.remove('active'));step.classList.add('active');document.getElementById(step.dataset.panel).classList.add('active')}));</script>
+
+  <footer>
+    <span>Built by Christian Caviedes</span>
+    <span>Deterministic core · MIT licensed · v0.2</span>
+    <a href="https://github.com/christiancaviedes/agentic-program-ops">Read the architecture ↗</a>
+  </footer>
+  <script src="app.js"></script>
 </body>
 </html>
