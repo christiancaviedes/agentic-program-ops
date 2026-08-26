@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentic-program-ops"
-version = "0.1.0"
+version = "0.3.0"
 description = "Turn PRD and Jira-style program inputs into execution-ready operating artifacts."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -14,7 +14,8 @@ keywords = ["tpm", "program-management", "agentic-workflows", "ai-platform"]
 
 [project.scripts]
 program-ops = "program_ops.cli:main"
+program-ops-jira = "program_ops.jira_cli:main"
+program-ops-enrich = "program_ops.enrich_cli:main"
 
 [tool.setuptools.packages.find]
 include = ["program_ops*"]
-

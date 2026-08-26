@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import secrets
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -83,6 +84,7 @@ def _reject_cycles(graph: dict[str, list[str]]) -> None:
 
 def generate_artifacts(data: dict[str, Any], output_dir: Path, approved: bool = False) -> RunResult:
     started = time.perf_counter()
+    started_ns = time.time_ns()
     output_dir.mkdir(parents=True, exist_ok=True)
     review_status = "APPROVED FOR PLANNING" if approved else "DRAFT — HUMAN REVIEW REQUIRED"
     workstreams = data["workstreams"]
@@ -116,12 +118,30 @@ def generate_artifacts(data: dict[str, Any], output_dir: Path, approved: bool = 
     paths.append(metrics_path)
 
     trace = {
+        "schema": "opentelemetry-span-v1",
+        "trace_id": secrets.token_hex(16),
+        "span_id": secrets.token_hex(8),
+        "name": "program_ops.compile",
+        "kind": "INTERNAL",
+        "start_time_unix_nano": started_ns,
+        "end_time_unix_nano": time.time_ns(),
+        "status": {"code": "OK"},
+        "resource": {"service.name": "agentic-program-ops", "service.version": "0.3.0"},
+        "attributes": {
+            "program.name": data["program"],
+            "artifact.count": len(artifacts),
+            "workstream.count": len(workstreams),
+            "dependency.count": metrics["dependencies"],
+            "risk.count": metrics["open_risks"],
+            "human_review.required": not approved,
+            "model.cost.usd": 0,
+        },
+        "events": [{
+            "time_unix_nano": time.time_ns(),
+            "name": "artifact_generation_completed",
+            "attributes": {"review.status": review_status},
+        }],
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "event": "artifact_generation_completed",
-        "program": data["program"],
-        "output_count": len(artifacts),
-        "review_status": review_status,
-        "metrics": metrics,
     }
     trace_path = output_dir / "trace.jsonl"
     trace_path.write_text(json.dumps(trace) + "\n", encoding="utf-8")
@@ -249,4 +269,3 @@ def _executive_brief(
 
 Confirm sequencing, named owners, and risk acceptance before the plan is used for execution.
 """
-

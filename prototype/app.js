@@ -140,8 +140,26 @@ function compileArtifacts(data, approved) {
   };
   artifacts["run-metrics.json"] = JSON.stringify(metrics, null, 2) + "\n";
   artifacts["trace.jsonl"] = JSON.stringify({
-    timestamp: new Date().toISOString(), event: "artifact_generation_completed", program: data.program,
-    output_count: 4, review_status: status, metrics
+    schema: "opentelemetry-span-v1",
+    trace_id: crypto.randomUUID().replaceAll("-", ""),
+    span_id: crypto.randomUUID().replaceAll("-", "").slice(0, 16),
+    name: "program_ops.compile",
+    kind: "INTERNAL",
+    start_time_unix_nano: String(BigInt(Date.now()) * 1000000n),
+    end_time_unix_nano: String(BigInt(Date.now()) * 1000000n),
+    status: { code: "OK" },
+    resource: { "service.name": "agentic-program-ops", "service.version": "0.3.0" },
+    attributes: {
+      "program.name": data.program,
+      "artifact.count": 4,
+      "workstream.count": metrics.workstreams,
+      "dependency.count": metrics.dependencies,
+      "risk.count": metrics.open_risks,
+      "human_review.required": !approved,
+      "model.cost.usd": 0
+    },
+    events: [{ name: "artifact_generation_completed", attributes: { "review.status": status } }],
+    timestamp: new Date().toISOString()
   }) + "\n";
   return { artifacts, metrics, status };
 }

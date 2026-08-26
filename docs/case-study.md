@@ -32,7 +32,7 @@ The public implementation is measured as a software artifact, not presented as a
 - **Validation coverage:** automated tests reject missing required fields, unknown dependencies, duplicate identifiers, and dependency cycles before output generation.
 - **Runtime:** 100 clean local runs on Python 3.11 completed at a 0.24 ms median, 0.36 ms p95, and 0.49 ms maximum for the reference four-workstream input (measured August 26, 2026; machine-specific, excluding process startup and disk cleanup).
 - **Browser workflow:** the Pages compiler produces the same six-file contract, supports explicit approval state, and exports a valid ZIP without network submission or a model call.
-- **Regression posture:** 7/7 unit tests and the Python 3.10–3.12 CI matrix pass.
+- **Regression posture:** 10/10 unit tests and the Python 3.10–3.12 CI matrix pass.
 
 These are reproducible engineering measures. Adoption, time saved, and business ROI have not yet been measured and are not claimed.
 

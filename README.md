@@ -64,7 +64,7 @@ See [`examples/launch-input.json`](examples/launch-input.json) for a complete en
 | Human accountability | Draft-by-default review gate; explicit `--approve` action |
 | Regression protection | Unit tests across Python 3.10, 3.11, and 3.12 |
 | Evaluation gate | Completeness, dependency recall, risk visibility, review-state, and cost checks |
-| Observability | Per-run latency/cost metrics and JSONL trace event |
+| Observability | Per-run metrics plus an OpenTelemetry-compatible JSONL span |
 | Cost discipline | Deterministic local core; estimated model cost is $0 |
 | Failure behavior | Invalid plans exit non-zero with actionable errors |
 | Supply chain | No runtime dependencies; least-privilege GitHub Actions permissions |
@@ -100,6 +100,43 @@ flowchart LR
 
 Read the [architecture](architecture/system-overview.md), [ADR](docs/adr/0001-deterministic-core.md), [threat model](docs/threat-model.md), and [sanitized production case study](docs/case-study.md).
 
+## Jira Cloud import
+
+The read-only Jira adapter fetches a bounded issue set using JQL and maps keys, owners,
+status, due dates, labels, and `Blocks` links into the validated contract:
+
+```bash
+export JIRA_BASE_URL="https://example.atlassian.net"
+export JIRA_EMAIL="program-owner@example.com"
+export JIRA_API_TOKEN="..."
+
+program-ops-jira \
+  --jql 'project = AIP AND fixVersion = "Pilot" ORDER BY Rank' \
+  --metadata examples/jira-program-metadata.json \
+  --output build/jira-program.json
+```
+
+The adapter performs no writes and never places the API token in command arguments or
+generated output. See the [Jira adapter guide](docs/jira-adapter.md).
+
+## Optional provider-neutral enrichment
+
+The deterministic core remains the source of truth. A separate enrichment command can ask
+an OpenAI-compatible endpoint—including a local gateway—for bounded narrative, questions,
+and risk notes without changing owners, dates, dependencies, status, or approval:
+
+```bash
+export LLM_API_KEY="..."
+program-ops-enrich examples/launch-input.json \
+  --base-url https://api.example.com \
+  --model provider-model-name \
+  --output build/enrichment.json
+```
+
+The provider contract is swappable, credentials remain in environment variables, output is
+always review-only, and provider failure never blocks deterministic compilation. See the
+[enrichment boundary](docs/llm-enrichment.md).
+
 ## Failure modes and recovery
 
 - **Missing/invalid fields:** the CLI stops before creating artifacts; correct the input and rerun.
@@ -113,7 +150,8 @@ Read the [architecture](architecture/system-overview.md), [ADR](docs/adr/0001-de
 
 - `v0.1`: deterministic CLI, CI, evals, trace/metrics, Pages demo, governance docs
 - `v0.2`: interactive browser compiler, JSON upload, artifact preview, approval gate, ZIP export
-- `v0.3`: optional provider-neutral LLM enrichment, Jira/Linear adapters, OpenTelemetry spans
+- `v0.3`: read-only Jira Cloud adapter, provider-neutral LLM enrichment boundary, and OpenTelemetry-compatible span records
+- `v0.4`: Linear adapter and diff-aware plan updates
 - `v1.0`: policy-controlled multi-program workspace with approval audit trail
 
 ## Why I built it

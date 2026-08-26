@@ -1,0 +1,9 @@
+{
+  "program": "Enterprise AI Support Copilot",
+  "objective": "Launch a governed support copilot with measurable quality and operational readiness.",
+  "target_date": "2026-11-20",
+  "executive_owner": "VP, Customer Experience",
+  "assumptions": ["The Jira project is the source of truth for delivery status."],
+  "decisions": [],
+  "risks": []
+}
